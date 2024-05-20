@@ -87,6 +87,37 @@ class ProductUsecase:
         # Lógica para aplicar filtros adicionais (nome, cpf, etc.)
 
 ```
+## CRUD(Como exposto no Video , seguindo os principios ) 
+
+Create (Criação de Produto):
+
+    Para a operação de criação de produto, precisamos implementar a lógica para inserir um novo produto no banco de dados. Isso envolve receber os dados do produto, como nome, quantidade, preço e status, e salvá-los no banco de dados. Além disso, podemos adicionar validações para garantir que os dados fornecidos sejam válidos antes de salvar.
+    Após a implementação, podemos escrever testes para garantir que a criação de produto funcione corretamente. Os testes devem verificar se um novo produto é criado com sucesso no banco de dados e se os dados inseridos correspondem aos dados fornecidos.
+
+Read (Leitura de Produto):
+
+    A operação de leitura de produto envolve recuperar informações sobre um produto específico ou uma lista de produtos do banco de dados. Isso pode ser feito consultando o banco de dados com base em filtros como ID, nome, preço, etc.
+    Para testar a leitura de produtos, podemos escrever testes que verifiquem se os produtos são recuperados corretamente do banco de dados com base nos filtros fornecidos.
+
+Update (Atualização de Produto):
+
+    Atualizar um produto envolve modificar os dados de um produto existente no banco de dados. Isso geralmente é feito através de uma solicitação PATCH, onde os campos do produto que precisam ser atualizados são enviados junto com o ID do produto.
+    Ao implementar a atualização de produto, devemos garantir que apenas os campos fornecidos sejam atualizados e que o campo updated_at seja atualizado com a data e hora atuais.
+    Os testes para a atualização de produto devem garantir que os dados do produto sejam atualizados corretamente no banco de dados e que o campo updated_at seja atualizado conforme esperado.
+
+Delete (Exclusão de Produto):
+
+    A operação de exclusão de produto envolve remover um produto específico do banco de dados com base no ID do produto fornecido.
+    Ao implementar a exclusão de produto, devemos garantir que o produto seja removido corretamente do banco de dados e que seja retornado um código de status apropriado para indicar o sucesso da operação.
+    Os testes para a exclusão de produto devem verificar se o produto é removido com sucesso do banco de dados e se um código de status apropriado é retornado.
+
+Testes de Use Cases:
+
+    Os testes de Use Cases são escritos para testar a lógica de negócios da aplicação, isolando-a de qualquer dependência externa, como bancos de dados ou APIs.
+    Para testar os casos de uso relacionados aos produtos, devemos criar objetos mock ou simulados que imitem o comportamento do banco de dados e outras dependências externas.
+    Os testes devem cobrir todos os cenários possíveis para cada caso de uso, incluindo casos de sucesso e casos de falha.
+    Os testes devem garantir que a lógica de negócios funcione conforme o esperado, manipulando adequadamente entradas válidas e inválidas, e gerando resultados corretos.
+
 
 ## O que é TDD?
 TDD é uma sigla para `Test Driven Development`, ou Desenvolvimento Orientado a Testes. A ideia do TDD é que você trabalhe em ciclos.
