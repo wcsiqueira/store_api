@@ -23,6 +23,93 @@ usecases/
     └── update - inclusão  exceção NotFoundException e atualização de updated_at no método update
 
 ```
+
+## Resolução do Desafio 
+```shell
+  $Arvoré de arquivos 
+- se comunica com apps externas;
+controllers/
+│
+├── product.py
+│   ├── post - Para o  tratamento de exceção para InsertException no método post
+│   └── patch - Aqui p tratamento de exceção para NotFoundException no método patch
+│  
+core/
+│
+└── exceptions.py
+    ├── InsertException - Nova exceção adicionada para tratamento de erros de inserção
+    └── NotFoundException - Exceção existente usada para tratamento de dados não encontrados
+│
+usecases/
+│
+└── product.py
+    ├── create - Caso erro de inserção e aceitação de preço no método create
+    └── update - inclusão  exceção NotFoundException e atualização de updated_at no método update
+   
+      
+
+```
+
+```ruby
+    class ProductUsecase:
+    async def update(self, id: UUID4, body: ProductUpdate) -> ProductUpdateOut:
+        try:
+            # Lógica para atualizar o produto
+        except Exception as e:
+            raise NotFoundException("Produto não encontrado")
+           
+
+```            
+```ruby
+# Update: Modifique o método de patch para retornar uma exceção de Not Found
+#Importação 
+from store.core.exceptions import NotFoundException
+from store.schemas.product import ProductUpdate, ProductUpdateOut
+
+@router.patch(path="/{id}", status_code=status.HTTP_200_OK)
+async def patch(
+    id: UUID4 = Path(alias="id"),
+    body: ProductUpdate = Body(...),
+    usecase: ProductUsecase = Depends(),
+) -> ProductUpdateOut:
+    try:
+        return await usecase.update(id=id, body=body)
+    except NotFoundException as exc:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Produto não encontrado ou nenhum campo para atualizar.")
+
+```
+```ruby
+
+# ********Controller/product.py 
+@router.post(path="/", status_code=status.HTTP_201_CREATED)
+async def post(
+    body: ProductIn = Body(...),
+    price: float = Body(...),
+    usecase: ProductUsecase = Depends()
+) -> ProductOut:
+    try:
+        return await usecase.create(body=body, price=price)
+    except InsertException as exc:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Erro ao inserir o produto. Por favor, tente novamente.")
+ ```
+
+```ruby
+ #Usecase/product.py
+class ProductUsecase:
+    async def create(self, body: ProductIn, price: float) -> ProductOut:
+        try:
+            # Lógica para inserir o produto com o preço
+        except Exception as e:
+            raise InsertException(f"Error inserting product: {str(e)}")
+
+    async def query(self, min_price: float = 5000, max_price: float = 8000, nome: Optional[str] = None, cpf: Optional[str] = None) -> List[ProductOut]:
+        query = {
+            "price": {"$gt": min_price, "$lt": max_price}
+        }
+        # Lógica para aplicar filtros adicionais (nome, cpf, etc.)
+
+```
+
 ## O que é TDD?
 TDD é uma sigla para `Test Driven Development`, ou Desenvolvimento Orientado a Testes. A ideia do TDD é que você trabalhe em ciclos.
 
