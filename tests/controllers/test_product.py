@@ -1,8 +1,19 @@
 from typing import List
-
 import pytest
 from tests.factories import product_data
 from fastapi import status
+from fastapi.testclient import TestClient
+from main import app
+
+
+client = TestClient(app)
+
+
+def test_query_products():
+    # Teste para verificar se a consulta de produtos por faixa de preço retorna 2O0K e uma lista de produtos
+    response = client.get("/products/?minPrice=100&maxPrice=1000")
+    assert response.status_code == 200
+    assert isinstance(response.json(), list)
 
 
 async def test_controller_create_should_return_success(client, products_url):
