@@ -1,5 +1,28 @@
 # TDD Project
 
+## Resolução do Desafio 
+```shell
+  $Arvoré de arquivos 
+- se comunica com apps externas;
+controllers/
+│
+├── product.py
+│   ├── post - Para o  tratamento de exceção para InsertException no método post
+│   └── patch - Aqui p tratamento de exceção para NotFoundException no método patch
+│
+core/
+│
+└── exceptions.py
+    ├── InsertException - Nova exceção adicionada para tratamento de erros de inserção
+    └── NotFoundException - Exceção existente usada para tratamento de dados não encontrados
+│
+usecases/
+│
+└── product.py
+    ├── create - Caso erro de inserção e aceitação de preço no método create
+    └── update - inclusão  exceção NotFoundException e atualização de updated_at no método update
+
+```
 ## O que é TDD?
 TDD é uma sigla para `Test Driven Development`, ou Desenvolvimento Orientado a Testes. A ideia do TDD é que você trabalhe em ciclos.
 
@@ -28,9 +51,6 @@ Uma aplicação que:
 
 ## O que não é?
 Uma aplicação que:
-- se comunica com apps externas;
-
-
 ## Solução Proposta
 Desenvolvimento de uma aplicação simples a partir do TDD, que permite entender como criar tests com o `pytest`. Construindo testes de Schemas, Usecases e Controllers (teste de integração).
 
