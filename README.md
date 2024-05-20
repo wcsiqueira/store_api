@@ -9,30 +9,6 @@ controllers/
 ├── product.py
 │   ├── post - Para o  tratamento de exceção para InsertException no método post
 │   └── patch - Aqui p tratamento de exceção para NotFoundException no método patch
-│
-core/
-│
-└── exceptions.py
-    ├── InsertException - Nova exceção adicionada para tratamento de erros de inserção
-    └── NotFoundException - Exceção existente usada para tratamento de dados não encontrados
-│
-usecases/
-│
-└── product.py
-    ├── create - Caso erro de inserção e aceitação de preço no método create
-    └── update - inclusão  exceção NotFoundException e atualização de updated_at no método update
-
-```
-
-## Resolução do Desafio 
-```shell
-  $Arvoré de arquivos 
-- se comunica com apps externas;
-controllers/
-│
-├── product.py
-│   ├── post - Para o  tratamento de exceção para InsertException no método post
-│   └── patch - Aqui p tratamento de exceção para NotFoundException no método patch
 │  
 core/
 │
@@ -51,6 +27,7 @@ usecases/
 ```
 
 ```ruby
+
     class ProductUsecase:
     async def update(self, id: UUID4, body: ProductUpdate) -> ProductUpdateOut:
         try:
@@ -59,7 +36,8 @@ usecases/
             raise NotFoundException("Produto não encontrado")
            
 
-```            
+```
+
 ```ruby
 # Update: Modifique o método de patch para retornar uma exceção de Not Found
 #Importação 
@@ -94,7 +72,7 @@ async def post(
  ```
 
 ```ruby
- #Usecase/product.py
+ #***Usecase/product.py
 class ProductUsecase:
     async def create(self, body: ProductIn, price: float) -> ProductOut:
         try:
