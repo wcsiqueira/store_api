@@ -8,3 +8,9 @@ class BaseException(Exception):
 
 class NotFoundException(BaseException):
     message = "Not Found"
+
+
+# Primeira solicitação do Desafio adicionar Excessão de inserção
+class InsertionException(BaseException):
+    message = "Error inserting the product"
+
